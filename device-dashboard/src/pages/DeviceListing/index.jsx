@@ -7,7 +7,7 @@ import useSetFilterHook from '../../hooks/device/useSetFilterhook.js';
 import { options } from '../../constants/listingfilter/ListingFilter.js';
 
 function DeviceListing() {
-    const { listing, loading, error } = useFetchListingHook();
+    const { listing, loading, error, updateListing } = useFetchListingHook();
     const [filter, handleSetFilter] = useSetFilterHook("All");
 
     const data = useMemo(() => {
@@ -25,11 +25,20 @@ function DeviceListing() {
         handleSetFilter(value);
     }
 
+    const updateContent = (updatedDevice) => {
+        const updatedListing = listing.map((device) => {
+            if (device.id === updatedDevice.id) {
+                return updatedDevice;
+            }
+            return device;
+        });
+        updateListing(updatedListing);
+    }
     return (
         <main>
             <h1>Device Listing</h1>
             <SelectBox options={options} value={filter} onChange={onFilterChange}/>
-            <Table columns={ListingcolumnsConfig} data={data} />
+            <Table columns={ListingcolumnsConfig} data={data} updateListing={updateContent}/>
         </main>
     )
 }

@@ -15,7 +15,10 @@ function useFetchListingHook() {
         });
     }, []);
 
-    return { listing, loading };
+    const updateListing = (updatedListing) => {
+        setListing(updatedListing);
+    };
+    return { listing, loading, updateListing, error };
 }
 
 export default useFetchListingHook;

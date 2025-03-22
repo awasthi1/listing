@@ -3,7 +3,7 @@ import SidebarModal from "../../components/SideBarModal/index.jsx";
 import DeviceDetails from "../../pages/DeviceDetails/DeviceDetails.jsx";
 import "./Table.css";
 
-function Table({ columns, data }) {
+function Table({ columns, data, updateListing }) {
     const [isOpen, setIsOpen] = React.useState(false);
     const [selectedRow, setSelectedRow] = React.useState(null);
 
@@ -38,7 +38,7 @@ function Table({ columns, data }) {
                                 <button className="open-btn" onClick={() => {
                                     showRecord(row)
                                 }}>
-                                    Open Sidebar
+                                    View
                                 </button>
                             </td>
                         </tr>
@@ -48,7 +48,7 @@ function Table({ columns, data }) {
 
 
             <SidebarModal isOpen={isOpen} onClose={closeModal}>
-                {selectedRow && <DeviceDetails deviceId={selectedRow.id} />}
+                {selectedRow && <DeviceDetails deviceId={selectedRow.id} updateListing={updateListing}/>}
             </SidebarModal>
         </>
     )

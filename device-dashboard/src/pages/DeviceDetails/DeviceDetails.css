@@ -1,0 +1,22 @@
+.device-details {
+  display: flex;
+  flex-direction: column;
+  padding: 20px;
+  gap: 2rem;
+}
+.device-details .device-details-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.device-details .device-details-header h1 {
+  font-size: 1.5rem;
+  font-weight: 600;
+}
+.device-details .device-details-header button {
+  background-color: #f0f0f0;
+  border: none;
+  padding: 0.5rem 1rem;
+  border-radius: 5px;
+  cursor: pointer;
+}
