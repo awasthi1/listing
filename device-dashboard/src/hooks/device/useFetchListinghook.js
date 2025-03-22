@@ -7,8 +7,10 @@ function useFetchListingHook() {
     useEffect(() => {
         setLoading(true);
         fetch("http://localhost:5001/devices").then((res) => res.json()).then((listing) => {
-            setListing(listing);
-            setLoading(false);
+            setTimeout(()=>{
+                setListing(listing);
+                setLoading(false);
+            },2000);
         }).catch((erro) => {
             setError(erro);
             setLoading(false);

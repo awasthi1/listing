@@ -5,6 +5,7 @@ import { ListingcolumnsConfig } from '../../constants/listingcolumn/Columnconfig
 import SelectBox from '../../components/Select/index.jsx';
 import useSetFilterHook from '../../hooks/device/useSetFilterhook.js';
 import { options } from '../../constants/listingfilter/ListingFilter.js';
+import Loader from '../../components/Loader/Loader.jsx';
 
 function DeviceListing() {
     const { listing, loading, error, updateListing } = useFetchListingHook();
@@ -18,7 +19,7 @@ function DeviceListing() {
         });
     }, [filter, listing]);
 
-    if (loading) return <div>Loading...</div>;
+    if (loading) return <div style={{display:'flex', width:'100%'}}><Loader/></div>;
     if (error) return <div>Error: {error?.message || 'An err occurred while fetching data'}</div>;
 
     const onFilterChange = (value) => {
