@@ -1,25 +1,35 @@
-import React,{useState} from 'react';
-import useFetchListingHook from '../../hooks/useFetchListinghook.js';
+import React, { useState, useMemo } from 'react';
+import useFetchListingHook from '../../hooks/device/useFetchListinghook.js';
 import Table from '../../components/Table';
-import {ListingcolumnsConfig} from '../../constants/listingcolumn/Columnconfig.js';
+import { ListingcolumnsConfig } from '../../constants/listingcolumn/Columnconfig.js';
 import SelectBox from '../../components/Select/index.jsx';
-
-const options = [
-    { value: "Active", label: "Active" },
-    { value: "Inactive", label: "Inactive" },
-    { value: "All", label: "All" }
-];
+import useSetFilterHook from '../../hooks/device/useSetFilterhook.js';
+import { options } from '../../constants/listingfilter/ListingFilter.js';
 
 function DeviceListing() {
     const { listing, loading, error } = useFetchListingHook();
-    const [filter, setFilter] = useState("All");
+    const [filter, handleSetFilter] = useSetFilterHook("All");
+
+    const data = useMemo(() => {
+        if (!listing) return [];
+        return listing?.filter((item) => {
+            if (filter === "All") return true;
+            return item?.Status === filter;
+        });
+    }, [filter, listing]);
+
     if (loading) return <div>Loading...</div>;
-    if (error) return <div>Error: {error.message}</div>;
+    if (error) return <div>Error: {error?.message || 'An err occurred while fetching data'}</div>;
+
+    const onFilterChange = (value) => {
+        handleSetFilter(value);
+    }
+
     return (
         <main>
             <h1>Device Listing</h1>
-            <SelectBox options={options} value={filter}/>
-            <Table columns={ListingcolumnsConfig} data={listing} />
+            <SelectBox options={options} value={filter} onChange={onFilterChange}/>
+            <Table columns={ListingcolumnsConfig} data={data} />
         </main>
     )
 }

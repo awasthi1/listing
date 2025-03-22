@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import SidebarModal from "../../components/SideBarModal/index.jsx";
+import DeviceDetails from "../../pages/DeviceDetails/DeviceDetails.jsx";
 import "./Table.css";
 
 function Table({ columns, data }) {
@@ -19,7 +20,7 @@ function Table({ columns, data }) {
             <table className="table">
                 <thead>
                     <tr>
-                        {columns.map(({ key, label }) => (
+                        {columns?.map(({ key, label }) => (
                             <th key={key} onClick={() => { }} className="sortable">
                                 {label}
                             </th>
@@ -47,8 +48,7 @@ function Table({ columns, data }) {
 
 
             <SidebarModal isOpen={isOpen} onClose={closeModal}>
-                <h3>Sidebar Content</h3>
-                <p>This is some content inside the sidebar modal.</p>
+                {selectedRow && <DeviceDetails deviceId={selectedRow.id} />}
             </SidebarModal>
         </>
     )
