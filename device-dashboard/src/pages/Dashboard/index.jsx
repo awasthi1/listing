@@ -4,7 +4,7 @@ import DeviceListing from "../DeviceListing";
 function DashBoard() {
     return (
         <div className="dashboard-container">
-            <aside className="sidebar">
+            <aside className="dashboard-sidebar">
                 <h2>Dashboard</h2>
                 <ul>
                     <li><FaHome /> Home</li>

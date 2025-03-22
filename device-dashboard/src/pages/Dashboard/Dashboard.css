@@ -4,14 +4,14 @@
     height: 100vh;
   }
   
-  .sidebar {
+  .dashboard-sidebar {
     width: 200px;
     background: #2c3e50;
     color: white;
     padding: 20px;
   }
   
-  .sidebar ul {
+  .dashboard-sidebar ul {
     list-style: none;
     padding: 0;
   }
